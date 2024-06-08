@@ -55,18 +55,24 @@ public class StudentController {
     }
 
     @GetMapping("/showFormForUpdate")
-    public String update(@RequestParam("studentId") Integer studentId, Model model) {
+    public String showFormForUpdate(@RequestParam("studentId") Integer studentId, Model model) {
 
         StudentDTO studentDTO = studentService.findStudentById(studentId);
 
         model.addAttribute("student", studentDTO);
         return "tracker/student-form";
-
     }
 
     @PostMapping("/save")
-    public String addStudent(@ModelAttribute("studentDTO") StudentDTO studentDTO) {
-        studentService.addStudent(studentDTO);
+    public String saveStudent(@ModelAttribute("student") StudentDTO studentDTO, @RequestParam(required = false) Integer studentId) {
+        if (studentDTO.getId() != null) {
+            // Update existing student
+            studentService.updateStudent(studentDTO);
+        } else {
+            // Create new student
+            studentService.addStudent(studentDTO);
+        }
+
         return "redirect:/api/v1/students/list";
     }
 

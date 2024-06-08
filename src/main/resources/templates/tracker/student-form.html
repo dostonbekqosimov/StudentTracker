@@ -18,16 +18,19 @@
 <div class="container">
 
 
-    <h3> <a th:href="@{/api/v1/students/list}">Student Tracker</a></h3>
+    <h3> <a th:href="@{/api/v1/}">Student Tracker</a></h3>
+    <h3> <a th:href="@{/api/v1/}">Home</a></h3>
+
     <hr>
 
     <p class="h4 mb-4">Save Student</p>
 
     <form action="#" th:action="@{/api/v1/students/save}"
           th:object="${student}" method="POST">
+        <!-- ... -->
 
-<!--        Xato shuyerda bo'lgan bo'lishi mumkin-->
-<!--        <input type="hidden" th:field="*{id}">-->
+
+        <input type="hidden" th:field="*{id}">
 
         <input type="text" th:field="*{name}"
                class="form-control mb-4 w-25" placeholder="Name" required>

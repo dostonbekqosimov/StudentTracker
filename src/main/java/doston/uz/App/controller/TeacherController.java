@@ -1,5 +1,6 @@
 package doston.uz.App.controller;
 
+import doston.uz.App.entity.Level;
 import doston.uz.App.entity.Student;
 import doston.uz.App.entity.Teacher;
 import doston.uz.App.entity.TeacherDTO;
@@ -18,9 +19,10 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
-    @RequestMapping
-    public String tracker() {
-        return "Tracker is working";
+
+    @ModelAttribute("levels")
+    public Level[] levels() {
+        return Level.values();
     }
 
     @GetMapping("/list")

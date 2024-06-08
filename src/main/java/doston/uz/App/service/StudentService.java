@@ -45,20 +45,40 @@ public class StudentService {
     }
 
     public Student endStudentJourney(Integer studentId) {
+        Student student = studentRepository.findById(studentId).orElseThrow();
 
-        Student student = studentRepository.findById(studentId).get();
+        if (student.getEndDate() == null && student.isActive()) {
+            student.setEndDate(new Timestamp(System.currentTimeMillis()));
+            student.setActive(false);
+            return studentRepository.save(student);
+        }
 
-        student.setEndDate(new Timestamp(System.currentTimeMillis()));
-        student.setActive(false);
-        return studentRepository.save(student);
+        // If the endDate is already set and active is already false, return the student object without any changes
+        return student;
     }
 
 
+    // we have problem with updating student
+
+    public void updateStudent( StudentDTO studentDTO) {
+        Student existingStudent = studentRepository.findById(studentDTO.getId()).orElseThrow();
+        existingStudent.setName(studentDTO.getName());
+        existingStudent.setSurname(studentDTO.getSurname());
+        existingStudent.setPhoneNumber(studentDTO.getPhoneNumber());
+        existingStudent.setLevel(studentDTO.getLevel());
+
+        // Update the teacher if it has changed
+        Teacher teacher = teacherRepository.findById(studentDTO.getTeacherId()).orElseThrow();
+        existingStudent.setTeacher(teacher);
+
+        studentRepository.save(existingStudent);
+    }
 
     public StudentDTO findStudentById(Integer studentId) {
 
         Student student = studentRepository.findById(studentId).get();
         StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(student.getId());
         studentDTO.setName(student.getName());
         studentDTO.setSurname(student.getSurname());
         studentDTO.setPhoneNumber(student.getPhoneNumber());
