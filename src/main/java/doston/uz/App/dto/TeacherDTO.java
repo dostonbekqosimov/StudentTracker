@@ -1,4 +1,4 @@
-package doston.uz.App.entity;
+package doston.uz.App.dto;
 
 import lombok.Data;
 

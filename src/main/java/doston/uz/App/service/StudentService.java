@@ -1,8 +1,8 @@
 package doston.uz.App.service;
 
-import doston.uz.App.entity.Student;
-import doston.uz.App.entity.StudentDTO;
-import doston.uz.App.entity.Teacher;
+import doston.uz.App.model.Student;
+import doston.uz.App.dto.StudentDTO;
+import doston.uz.App.model.Teacher;
 import doston.uz.App.repository.StudentRepository;
 import doston.uz.App.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;

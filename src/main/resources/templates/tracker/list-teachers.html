@@ -43,9 +43,13 @@
                 <a th:href="@{/api/v1/teachers/showFormForUpdate(teacherId=${teacher.id})}" class="btn btn-info btn-sm">Update</a>
                 <a th:href="@{/api/v1/teachers/delete(teacherId=${teacher.id})}" class="btn btn-danger btn-sm">Delete</a>
                 <!-- Link to view students page -->
-                <a th:href="@{/api/v1/students/listForTeacher(teacherId=${teacher.id})}" class="btn btn-primary btn-sm">View Students</a>
+                <a th:href="@{/api/v1/teachers/listForTeacher(teacherId=${teacher.id})}" class="btn btn-primary btn-sm">View Students</a>
+<!--                <a th:href="@{/api/v1/teachers/listForTeacher(teacherId=${teacher.id})}" class="btn btn-primary btn-sm">View Students</a>-->
             </td>
         </tr>
+
+
+
         </tbody>
     </table>
 </div>

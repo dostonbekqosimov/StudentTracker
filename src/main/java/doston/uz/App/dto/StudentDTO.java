@@ -1,10 +1,9 @@
-package doston.uz.App.entity;
+package doston.uz.App.dto;
 
+import doston.uz.App.model.Level;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
-import java.sql.Timestamp;
 
 
 @Data

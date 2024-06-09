@@ -1,4 +1,4 @@
-package doston.uz.App.entity;
+package doston.uz.App.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -17,8 +17,10 @@ public class Teacher {
     private String name;
     private String surname;
     private String phoneNumber;
-    @OneToMany(mappedBy = "teacher")
+
+    @OneToMany
     @JsonManagedReference
     private List<Student> students;
+
 
 }

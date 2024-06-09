@@ -1,4 +1,4 @@
-package doston.uz.App.entity;
+package doston.uz.App.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

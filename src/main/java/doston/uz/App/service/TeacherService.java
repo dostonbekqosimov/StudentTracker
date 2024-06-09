@@ -1,7 +1,7 @@
 package doston.uz.App.service;
 
-import doston.uz.App.entity.Teacher;
-import doston.uz.App.entity.TeacherDTO;
+import doston.uz.App.model.Teacher;
+import doston.uz.App.dto.TeacherDTO;
 import doston.uz.App.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,9 @@ public class TeacherService {
     }
 
     public Teacher findTeacherById(Integer teacherId) {
+        System.out.println("Received teacherId: " + teacherId);
+        return teacherRepository.findById(teacherId).orElseThrow(() -> new RuntimeException("Teacher not found"));
 
-        return teacherRepository.findById(teacherId).get();
     }
+
 }

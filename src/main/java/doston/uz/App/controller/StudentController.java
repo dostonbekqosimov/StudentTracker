@@ -1,8 +1,8 @@
 package doston.uz.App.controller;
 
-import doston.uz.App.entity.Level;
-import doston.uz.App.entity.Student;
-import doston.uz.App.entity.StudentDTO;
+import doston.uz.App.model.Level;
+import doston.uz.App.model.Student;
+import doston.uz.App.dto.StudentDTO;
 import doston.uz.App.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +28,7 @@ public class StudentController {
 
     @GetMapping("/list")
     public String getStudents(Model model) {
+        System.out.println("I am called from getStudents");
 
         List<Student> students = studentService.getStudents();
 
