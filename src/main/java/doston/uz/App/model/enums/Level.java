@@ -1,4 +1,4 @@
-package doston.uz.App.model;
+package doston.uz.App.model.enums;
 
 public enum Level {
     STAGE1,

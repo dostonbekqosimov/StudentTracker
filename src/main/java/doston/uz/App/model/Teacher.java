@@ -18,9 +18,7 @@ public class Teacher {
     private String surname;
     private String phoneNumber;
 
-    @OneToMany
-    @JsonManagedReference
-    private List<Student> students;
+
 
 
 }

@@ -1,6 +1,6 @@
-package doston.uz.App.dto;
+package doston.uz.App.dto.studentDTO;
 
-import doston.uz.App.model.Level;
+import doston.uz.App.model.enums.Level;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -19,6 +19,8 @@ public class StudentDTO {
 
     @NotNull
     private Level level;
+
+    private Integer groupId;
 
     @NotNull
     private Integer teacherId;

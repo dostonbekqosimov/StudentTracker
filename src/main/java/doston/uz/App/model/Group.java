@@ -1,51 +1,48 @@
 package doston.uz.App.model;
 
+import doston.uz.App.model.enums.LessonTime;
 import doston.uz.App.model.enums.Level;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "students")
-public class Student {
+@Table(name = "groups")
+public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
-    @NotEmpty
-    @Column(name = "name")
-    private String name;
 
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "info_about_group")
+    private String infoAboutGroup;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "level")
     private Level level;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id", nullable = false)
-    private Teacher teacher;
+    @Column(name = "lesson_time")
+    @Enumerated(EnumType.STRING)
+    private LessonTime lessonTime;
 
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    private Group group;
 
     @Column(name = "start_date")
     private Timestamp startDate;
 
+    @Column(name = "update_date")
+    private Timestamp updateDate;
+
+
     @Column(name = "end_date")
     private Timestamp endDate;
+
 
     @Column(name = "active")
     private boolean active;
@@ -54,4 +51,6 @@ public class Student {
     protected void onCreate() {
         this.startDate = new Timestamp(System.currentTimeMillis());
     }
+
+
 }

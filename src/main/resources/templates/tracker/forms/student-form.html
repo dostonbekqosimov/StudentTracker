@@ -18,7 +18,7 @@
 <div class="container">
 
 
-    <h3> <a th:href="@{/api/v1/}">Student Tracker</a></h3>
+    <h3> Student Tracker</h3>
     <h3> <a th:href="@{/api/v1/}">Home</a></h3>
 
     <hr>
@@ -48,9 +48,12 @@
                 <option th:each="level : ${levels}" th:value="${level}" th:text="${#strings.capitalize(level.name())}"></option>
             </select>
         </div>
+        <input type="number" th:field="*{groupId}"
+               class="form-control mb-4 w-25" placeholder="Group Id"  required min="1">
+
 <!--        // Keyinchalik buni usernamega o'zgartiramiz-->
         <input type="number" th:field="*{teacherId}"
-               class="form-control mb-4 w-25" placeholder="Teacher Id"  required>
+               class="form-control mb-4 w-25" placeholder="Teacher Id"  required min="1">
 
         <button type="submit" class="btn btn-info col-2">Save</button>
 

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Create Group</title>
+</head>
+
+<body>
+
+<div class="container">
+
+
+    <h3> Student Tracker </h3>
+    <h3> <a th:href="@{/api/v1/}">Home</a></h3>
+
+    <hr>
+
+    <p class="h4 mb-4">Save Group</p>
+
+    <form action="#" th:action="@{/api/v1/groups/save}"
+          th:object="${group}" method="POST">
+
+
+        <input type="text" th:field="*{infoAboutGroup}"
+               class="form-control mb-4 w-25" placeholder="Information About Group" required>
+
+        <input type="number" th:field="*{teacherId}"
+               class="form-control mb-4 w-25" placeholder="TeacherId" required>
+
+        <div class="form-group">
+            <label for="level">Level</label>
+            <select id="level" name="level" th:field="*{level}" class="form-control mb-4 w-25" required>
+                <option value="" disabled selected>Select Level</option>
+                <option th:each="level : ${levels}" th:value="${level}" th:text="${#strings.capitalize(level.name())}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="lessonTime">Lesson Time</label>
+            <select id="lessonTime" name="lessonTime" th:field="*{lessonTime}" class="form-control mb-4 w-25" required>
+                <option value="" disabled selected>Select Lesson Time</option>
+                <option th:each="lessonTime : ${lessonTimes}" th:value="${lessonTime.name()}" th:text="${#strings.capitalize(lessonTime.name())}"></option>
+            </select>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/api/v1/teachers/list}">Back to TeacherList List</a>
+
+</div>
+
+
+</body>
+
+</html>

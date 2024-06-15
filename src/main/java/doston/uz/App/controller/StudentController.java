@@ -1,8 +1,9 @@
 package doston.uz.App.controller;
 
-import doston.uz.App.model.Level;
+import doston.uz.App.dto.studentDTO.StudentResponseDTO;
+import doston.uz.App.model.enums.Level;
 import doston.uz.App.model.Student;
-import doston.uz.App.dto.StudentDTO;
+import doston.uz.App.dto.studentDTO.StudentDTO;
 import doston.uz.App.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,19 +31,15 @@ public class StudentController {
     public String getStudents(Model model) {
         System.out.println("I am called from getStudents");
 
-        List<Student> students = studentService.getStudents();
+        List<StudentResponseDTO> students = studentService.getStudents();
 
-        students.sort(Comparator.comparing(Student::isActive).reversed());
+        students.sort(Comparator.comparing(StudentResponseDTO::isActive).reversed());
 
 
         model.addAttribute("students", students);
-        return "tracker/list-students";
+        return "tracker/lists/list-students";
     }
 
-    @GetMapping("/{studentId}")
-    public Student getStudentById(Integer studentId) {
-        return studentService.getStudentById(studentId);
-    }
 
     @GetMapping("/showFormForAdd")
     public String addEmployee(Model model) {
@@ -52,7 +49,7 @@ public class StudentController {
         model.addAttribute("student", student);
 
 
-        return "tracker/student-form";
+        return "tracker/forms/student-form";
     }
 
     @GetMapping("/showFormForUpdate")
@@ -61,18 +58,22 @@ public class StudentController {
         StudentDTO studentDTO = studentService.findStudentById(studentId);
 
         model.addAttribute("student", studentDTO);
-        return "tracker/student-form";
+        return "tracker/forms/student-form-update";
     }
 
+    @PutMapping("/update")
+    public String updateStudent(@ModelAttribute("student") StudentDTO studentDTO) {
+
+        studentService.updateStudent(studentDTO);
+
+        return "redirect:/api/v1/students/list";
+    }
+
+    // I have to write another method for updating!!!
     @PostMapping("/save")
-    public String saveStudent(@ModelAttribute("student") StudentDTO studentDTO, @RequestParam(required = false) Integer studentId) {
-        if (studentDTO.getId() != null) {
-            // Update existing student
-            studentService.updateStudent(studentDTO);
-        } else {
-            // Create new student
-            studentService.addStudent(studentDTO);
-        }
+    public String saveStudent(@ModelAttribute("student") StudentDTO studentDTO) {
+
+        studentService.addStudent(studentDTO);
 
         return "redirect:/api/v1/students/list";
     }
