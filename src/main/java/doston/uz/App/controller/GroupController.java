@@ -3,10 +3,12 @@ package doston.uz.App.controller;
 import doston.uz.App.dto.groupDTO.GroupForm;
 import doston.uz.App.dto.groupDTO.GroupResponseDTO;
 import doston.uz.App.dto.studentDTO.StudentDTO;
+import doston.uz.App.dto.studentDTO.StudentResponseDTO;
 import doston.uz.App.model.Group;
 import doston.uz.App.model.enums.LessonTime;
 import doston.uz.App.model.enums.Level;
 import doston.uz.App.service.GroupService;
+import doston.uz.App.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,9 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
+    @Autowired
+    private StudentService studentService;
+
 
     @ModelAttribute("levels")
     public Level[] levels() {
@@ -33,13 +38,25 @@ public class GroupController {
     }
 
     @GetMapping("/list")
-    public String listGroup(Model model) {
+    public String listGroup( Model model) {
 
         List<GroupResponseDTO> groupList = groupService.getAllGroups();
 
         model.addAttribute("groupList", groupList);
 
         return "tracker/lists/list-groups";
+    }
+
+    @GetMapping("/studentsListForGroup")
+    public String getAllStudentWithGroupId(@RequestParam("groupId") Integer groupId, Model model){
+        List<StudentResponseDTO> students = studentService.getAllStudentWithGroupId(groupId);
+
+        model.addAttribute("students", students);
+        model.addAttribute("groupId", groupId);
+
+        return "tracker/lists/list-students";
+
+
     }
 
 

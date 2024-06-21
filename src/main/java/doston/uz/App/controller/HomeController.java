@@ -12,7 +12,7 @@ public class HomeController {
     public String index() {
 
 
-        return "tracker/navbar";
+        return "tracker/index";
     }
 
 

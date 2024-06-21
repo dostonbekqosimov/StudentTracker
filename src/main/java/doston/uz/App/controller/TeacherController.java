@@ -1,11 +1,13 @@
 package doston.uz.App.controller;
 
+import doston.uz.App.dto.groupDTO.GroupResponseDTO;
 import doston.uz.App.dto.studentDTO.StudentResponseDTO;
 import doston.uz.App.dto.teacherDTO.TeacherPostDTO;
 import doston.uz.App.dto.teacherDTO.TeacherUpdateDTO;
 import doston.uz.App.model.enums.Level;
 import doston.uz.App.model.Student;
 import doston.uz.App.model.Teacher;
+import doston.uz.App.service.GroupService;
 import doston.uz.App.service.StudentService;
 import doston.uz.App.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class TeacherController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private GroupService groupService;
+
 
     @ModelAttribute("levels")
     public Level[] levels() {
@@ -39,24 +44,20 @@ public class TeacherController {
         return "tracker/lists/list-teachers";
     }
 
-    @GetMapping("/listForTeacher")
+    @GetMapping("/groupListForTeacher")
     public String getStudentsForTeacher(@RequestParam("teacherId") Integer teacherId, Model model) {
 
 // keyinchalik shuni o'rniga guruhlarni chiqazamiz birinchi keyin o'sha guruhdagi o'quvchilarni chiqazamiz
+        // bu bo'ldi yani yuqoridagi
 
         Teacher teacher = teacherService.findTeacherById(teacherId);
 
-        System.out.println("After finding teacher by id: " + teacher);
-
-        List<StudentResponseDTO> students = studentService.getStudentsForTeacher(teacherId);
+        List<GroupResponseDTO> groups = groupService.getAllGroupsWithTeacherId(teacherId);
 
 
-        System.out.println("Students for teacher: " + students);
-        System.out.println(students);
-
-        model.addAttribute("students", students);
+        model.addAttribute("groupList", groups);
         model.addAttribute("teacher", teacher);
-        return "tracker/lists/list-students";
+        return "tracker/lists/list-groups";
 
     }
 

@@ -65,4 +65,21 @@ public class GroupService {
 
 
     }
+
+    public List<GroupResponseDTO> getAllGroupsWithTeacherId(Integer teacherId) {
+        List<Group> groups = groupRepository.findAllByTeacherId(teacherId);
+
+        List<GroupResponseDTO> groupResponseDTOS = new ArrayList<>();
+
+
+        for (Group group : groups) {
+            GroupResponseDTO groupResponseDTO = EntityDTOConverter.convertToGroupResponseDTO(group);
+            // Buyoqda studentlarni countini o'zim qo'shyabman.
+            groupResponseDTO.setStudentCount(studentRepository.countByGroupId(group.getId()));
+            groupResponseDTOS.add(groupResponseDTO);
+        }
+
+        return groupResponseDTOS;
+
+    }
 }

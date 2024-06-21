@@ -123,4 +123,19 @@ public class StudentService {
         }
         return studentResponseDTOS;
     }
+
+    public List<StudentResponseDTO> getAllStudentWithGroupId(Integer groupId) {
+
+        List<Student> students = studentRepository.findAllByGroupId(groupId);
+
+        List<StudentResponseDTO> studentResponseDTOS = new ArrayList<>();
+
+        for (Student student : students) {
+            StudentResponseDTO studentResponseDTO = EntityDTOConverter.convertToStudentResponseDTO(student);
+            studentResponseDTOS.add(studentResponseDTO);
+        }
+        return studentResponseDTOS;
+
+
+    }
 }
