@@ -1,21 +1,21 @@
 services:
   - type: web
-    name: your-app-name
+    name: my-spring-app
     env: docker
     buildCommand: ./mvnw package -DskipTests && docker build -t my-spring-app .
     startCommand: java -jar app.jar
     envVars:
-      - key: JDBC_DATABASE_URL
+      - key: SPRING_DATASOURCE_URL
         fromDatabase:
-          name: postgresql://user:ZL8zBTQ7QG525h4qDusPZ0oFlQM0b6Dz@dpg-cpvr3juehbks73e1vlo0-a/dbname_xcj9
+          name: mydatabase
           property: connectionString
-      - key: JDBC_DATABASE_USERNAME
+      - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
-          name: user
+          name: mydatabase
           property: user
-      - key: JDBC_DATABASE_PASSWORD
+      - key: SPRING_DATASOURCE_PASSWORD
         fromDatabase:
-          name: ZL8zBTQ7QG525h4qDusPZ0oFlQM0b6Dz
+          name: mydatabase
           property: password
 
 databases:
