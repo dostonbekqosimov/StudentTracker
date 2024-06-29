@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: your-app-name
+    env: docker
+    buildCommand: ./mvnw package -DskipTests
+    startCommand: java -jar target/*.jar
+    envVars:
+      - key: JDBC_DATABASE_URL
+        fromDatabase:
+          name: postgresql://user:ZL8zBTQ7QG525h4qDusPZ0oFlQM0b6Dz@dpg-cpvr3juehbks73e1vlo0-a/dbname_xcj9
+          property: connectionString
+      - key: JDBC_DATABASE_USERNAME
+        fromDatabase:
+          name: user
+          property: user
+      - key: JDBC_DATABASE_PASSWORD
+        fromDatabase:
+          name: ZL8zBTQ7QG525h4qDusPZ0oFlQM0b6Dz
+          property: password
+
+databases:
+  - name: mydatabase
+    databaseName: dbname_xcj9
+    user: user
