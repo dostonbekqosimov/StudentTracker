@@ -1,6 +1,7 @@
 package doston.uz.App.dto.groupDTO;
 
 
+import doston.uz.App.model.Teacher;
 import doston.uz.App.model.enums.LessonTime;
 import doston.uz.App.model.enums.Level;
 import lombok.Data;
@@ -12,7 +13,7 @@ public class GroupResponseDTO {
 
     private Integer id;
     private String infoAboutGroup;
-    private Integer teacherId;
+    private Teacher teacher;
     private Level level;
     private LessonTime lessonTime;
     private Timestamp startDate;

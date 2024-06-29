@@ -13,7 +13,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
 
-    <title>Create Group</title>
+    <title>Edit Group</title>
 </head>
 
 <body>
@@ -22,10 +22,11 @@
 <div class="container">
 
 
-    <p class="h4 mb-4">Save Group</p>
+    <p class="h4 mb-4">Edit Group</p>
 
-    <form action="#" th:action="@{/api/v1/groups/save}"
+    <form action="#" th:action="@{/api/v1/groups/edit(groupId=${groupId})}"
           th:object="${group}" method="POST">
+        <input type="hidden" name="_method" value="put"/>
 
 
         <input type="text" th:field="*{infoAboutGroup}"
@@ -60,11 +61,12 @@
         </div>
 
 
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <button type="submit" class="btn btn-info col-2">Edit</button>
 
     </form>
 
     <hr>
+
     <a th:href="@{/api/v1/groups/list}" class="btn btn-info btn-sm">Back to GroupList List</a>
 
 

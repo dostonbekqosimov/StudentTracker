@@ -1,5 +1,18 @@
-// I should add enrollments list for enrolls. It should look like student (maybe the same) | not done yet |
+// I should add enrollments list for enrolls. It should look like student (maybe the same) | ~~ DONE ~~
 
-// I should see teacher Id and group Id when adding new student to particular teacher's group | not done yet |
+// I should see teacher Id and group Id when adding new student to particular teacher's group  | ~~ DONE ~~ (I added teacher Name and Group Name)
 
 // I should see group Id when adding new student to particular group | not done yet |
+
+// I should complete CRUD for all controllers and then add security | not done yet |
+
+// I should eliminate Level or Group Id from students list because one of them is enough | not done yet |
+
+// Finish bosilganda student teacherni guruhidan chiqarilishi kerek | not done yet |
+
+// Student ni finish qilinganda uni teacherning studentlari ro'yhatidan chiqarish kerak | not done yet |
+
+// Student yoki Group ni inactive qilgandan keyin ularni har birini saqlaydigan alohida page ochib o'sha yerda ko'rsatgan yaxshi Enrollment ga ham I think  | not done yet |
+
+// I should add validation | not done yet |
+$2a$12$.eUySYf9I6YrZm2Q.gId7eVf392DtvPwawNeRvP5Atn9h8si.Npiu

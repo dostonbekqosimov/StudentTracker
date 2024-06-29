@@ -28,7 +28,7 @@ public class StudentResponseDTO {
 
     private Level level;
 
-    private Integer teacherId;
+    private String  teacherName;
 
     private Integer groupId;
 

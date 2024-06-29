@@ -2,10 +2,13 @@ package doston.uz.App.service;
 
 import doston.uz.App.dto.teacherDTO.TeacherPostDTO;
 import doston.uz.App.dto.teacherDTO.TeacherUpdateDTO;
+import doston.uz.App.model.Group;
 import doston.uz.App.model.Student;
 import doston.uz.App.model.Teacher;
+import doston.uz.App.repository.GroupRepository;
 import doston.uz.App.repository.StudentRepository;
 import doston.uz.App.repository.TeacherRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,9 @@ public class TeacherService {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private GroupRepository groupRepository;
 
 
     public List<Teacher> getTeachers() {
@@ -73,5 +79,23 @@ public class TeacherService {
         existingTeacher.setSurname(teacherUpdateDTO.getSurname());
         existingTeacher.setPhoneNumber(teacherUpdateDTO.getPhoneNumber());
         teacherRepository.save(existingTeacher);
+    }
+
+    public void deleteTeacher(Integer teacherId) {
+
+        Teacher teacher = teacherRepository.findById(teacherId).orElseThrow( () -> new RuntimeException("Teacher not found"));
+        teacherRepository.delete(teacher);
+    }
+
+    public List<Group> getGroupsByTeacherId(Integer teacherId) {
+        Teacher teacher = teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new EntityNotFoundException("Teacher not found"));
+
+        System.out.println("Hello odamlar!");
+        List<Group> groups =  groupRepository.findByTeacher(teacher);
+        System.out.println("Hello odamlar2!");
+        System.out.println(groups);
+        return groups;
+
     }
 }

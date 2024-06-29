@@ -24,3 +24,7 @@
         .btn-outline-light {
             font-size: 1.2rem; /* Larger button font size */
         }
+
+        .action-button-spacing {
+            margin-right: 10px;
+        }

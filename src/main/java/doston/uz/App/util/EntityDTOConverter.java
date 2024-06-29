@@ -1,5 +1,6 @@
 package doston.uz.App.util;
 
+import doston.uz.App.dto.groupDTO.GroupForm;
 import doston.uz.App.dto.groupDTO.GroupResponseDTO;
 import doston.uz.App.dto.studentDTO.StudentResponseDTO;
 import doston.uz.App.model.Group;
@@ -17,7 +18,7 @@ public class EntityDTOConverter {
 
         groupResponseDTO.setId(group.getId());
         groupResponseDTO.setInfoAboutGroup(group.getInfoAboutGroup());
-        groupResponseDTO.setTeacherId(group.getTeacher().getId());
+        groupResponseDTO.setTeacher(group.getTeacher());
         groupResponseDTO.setLevel(group.getLevel());
         groupResponseDTO.setLessonTime(group.getLessonTime());
         groupResponseDTO.setStartDate(group.getStartDate());
@@ -34,7 +35,7 @@ public class EntityDTOConverter {
         studentResponseDTO.setSurname(student.getSurname());
         studentResponseDTO.setPhoneNumber(student.getPhoneNumber());
         studentResponseDTO.setLevel(student.getLevel());
-        studentResponseDTO.setTeacherId(student.getTeacher().getId());
+        studentResponseDTO.setTeacherName(student.getTeacher().getName());
 
         // Check if the student has a group before getting the group ID
         if (student.getGroup() != null) {
@@ -47,6 +48,18 @@ public class EntityDTOConverter {
         studentResponseDTO.setActive(student.isActive());
         return studentResponseDTO;
 
+    }
+
+    public static GroupForm converToGroupForm(Group group){
+
+        GroupForm groupForm = new GroupForm();
+
+        groupForm.setInfoAboutGroup(group.getInfoAboutGroup());
+        groupForm.setTeacher(group.getTeacher());
+        groupForm.setLevel(group.getLevel());
+        groupForm.setLessonTime(group.getLessonTime());
+
+        return groupForm;
     }
 
 

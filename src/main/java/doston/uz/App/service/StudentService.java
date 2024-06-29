@@ -9,6 +9,7 @@ import doston.uz.App.repository.GroupRepository;
 import doston.uz.App.repository.StudentRepository;
 import doston.uz.App.repository.TeacherRepository;
 import doston.uz.App.util.EntityDTOConverter;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +45,16 @@ public class StudentService {
 
     public void addStudent(StudentDTO studentDTO) {
 
-        Teacher teacher = teacherRepository.findById(studentDTO.getTeacherId()).get();
-        Group group = groupRepository.findById(studentDTO.getGroupId()).get();
+        // The teacher is already set in the DTO, so we don't need to fetch it again
+        Teacher teacher = studentDTO.getTeacher();
+
+        // However, we should verify that this teacher exists in the database
+        if (!teacherRepository.existsById(teacher.getId())) {
+            throw new EntityNotFoundException("Teacher not found");
+        }
+
+        Group group = groupRepository.findById(studentDTO.getGroupId())
+                .orElseThrow(() -> new EntityNotFoundException("Group not found"));
 
         Student student = new Student();
         student.setName(studentDTO.getName());
@@ -83,7 +92,8 @@ public class StudentService {
         existingStudent.setLevel(studentDTO.getLevel());
 
         // Update the teacher if it has changed
-        Teacher teacher = teacherRepository.findById(studentDTO.getTeacherId()).orElseThrow();
+        Teacher teacher = studentDTO.getTeacher();
+
         Group group = groupRepository.findById(studentDTO.getGroupId()).orElseThrow();
 
         existingStudent.setTeacher(teacher);
@@ -101,7 +111,7 @@ public class StudentService {
         studentDTO.setSurname(student.getSurname());
         studentDTO.setPhoneNumber(student.getPhoneNumber());
         studentDTO.setLevel(student.getLevel());
-        studentDTO.setTeacherId(student.getTeacher().getId());
+        studentDTO.setTeacher(student.getTeacher());
 
         // Get the groupId from the associated Group object
         Group group = student.getGroup();

@@ -9,7 +9,7 @@ import lombok.Data;
 public class GroupForm {
 
     private String infoAboutGroup;
-    private Integer teacherId;
+    private Teacher teacher;
     private Level level;
     private LessonTime lessonTime;
 

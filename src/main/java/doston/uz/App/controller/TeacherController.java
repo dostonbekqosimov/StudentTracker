@@ -4,6 +4,7 @@ import doston.uz.App.dto.groupDTO.GroupResponseDTO;
 import doston.uz.App.dto.studentDTO.StudentResponseDTO;
 import doston.uz.App.dto.teacherDTO.TeacherPostDTO;
 import doston.uz.App.dto.teacherDTO.TeacherUpdateDTO;
+import doston.uz.App.model.Group;
 import doston.uz.App.model.enums.Level;
 import doston.uz.App.model.Student;
 import doston.uz.App.model.Teacher;
@@ -11,6 +12,7 @@ import doston.uz.App.service.GroupService;
 import doston.uz.App.service.StudentService;
 import doston.uz.App.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -99,6 +101,15 @@ public class TeacherController {
 
 
          teacherService.addTeacher(teacherPostDTO);
+
+        return "redirect:/api/v1/teachers/list";
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteTeacher(@RequestParam("teacherId") Integer teacherId) {
+        System.out.println("Teacher id " + teacherId + " in teacher controller");
+        teacherService.deleteTeacher(teacherId);
+        System.out.println("After deletion");
 
         return "redirect:/api/v1/teachers/list";
     }
