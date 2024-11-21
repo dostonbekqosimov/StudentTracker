@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"><link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <title>Save Teacher</title>
+</head>
+
+<body>
+<div th:replace="~{tracker/fragments/navbar :: navbar}"></div>
+
+<div class="container">
+
+
+    <p class="h4 mb-4">Save Teacher</p>
+
+    <form action="#" th:action="@{/api/v1/teachers/save}"
+          th:object="${teacher}" method="POST">
+
+        <!--        Xato shuyerda bo'lgan bo'lishi mumkin-->
+<!--                <input type="hidden" th:field="*{id}">-->
+
+        <input type="text" th:field="*{name}"
+               class="form-control mb-4 w-25" placeholder="Name" required>
+
+        <input type="text" th:field="*{surname}"
+               class="form-control mb-4 w-25" placeholder="Surname" required>
+
+        <input type="text" th:field="*{phoneNumber}"
+               class="form-control mb-4 w-25" placeholder="Phone Number" required>
+
+
+
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/api/v1/teachers/list}">Back to TeacherList List</a>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
